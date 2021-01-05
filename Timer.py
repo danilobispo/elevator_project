@@ -1,6 +1,6 @@
 import time
 
-class timer:
+class Timer:
     def __init__(self):
         self.initialTime = time.perf_counter()
 
