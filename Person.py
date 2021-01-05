@@ -8,11 +8,18 @@ class Person(OrderList):
     _currentfloor = -1
 
     def __init__(self, nid, currentfloor):
+        OrderList.__init__(self)
         self._currentfloor = currentfloor
         self._nid = nid
 
     def callelevator(self, objectivefloor):
         self._objectivefloor = objectivefloor
+        #Notifies the OrderList so he can add and inform elevator
+        self.notify()
+
+    @property
+    def nid(self):
+        return self._nid
 
     @property
     def currentfloor(self):
@@ -24,7 +31,7 @@ class Person(OrderList):
 
     @property
     def objectivefloor(self):
-        return self._currentfloor
+        return self._objectivefloor
 
     @objectivefloor.setter
     def objectivefloor(self, newvalue):

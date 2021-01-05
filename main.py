@@ -14,8 +14,8 @@ def print_hi(name):
 
 def print_personlist(personlist):
     for i in personlist:
-        print("nid:", i._nid)
-        print("currentfloor:", i._currentfloor)
+        print("nid:", i.nid)
+        print("currentfloor:", i.currentfloor)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
@@ -24,6 +24,10 @@ if __name__ == '__main__':
     personlist = []
     for i in range(0, 10):
         personlist.append(Person(i, random.randrange(1, 10, 1)))
+        #Attaches the person object to the elevator
+        personlist[i].attach(elevator)
     print_personlist(personlist)
+
+    personlist[0].callelevator(2)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
