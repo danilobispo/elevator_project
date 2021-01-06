@@ -4,7 +4,7 @@ class Timer:
     def __init__(self):
         self.initialTime = time.perf_counter()
 
-    def beginConting(self):
+    def beginCounting(self):
         self.initialTime = time.perf_counter()
 
     def getTime(self):
