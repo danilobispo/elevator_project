@@ -11,5 +11,7 @@ class Timer:
         self.currentTime = time.perf_counter()
         return self.currentTime
 
+
+
 #t = timer()
 #t.getTime()
