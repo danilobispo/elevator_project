@@ -144,8 +144,6 @@ class Elevator:
                 while self._currentFloor != self._pathFloors[0]:
                     down_or_up = self.determine_elevator_direction()
 
-
-
                     if self._timer.getTime() >= trip_time + 1:
                         if not down_or_up:  # Going down
                             self._currentFloor -= 1
@@ -159,8 +157,6 @@ class Elevator:
                         print("Elevator is going", "up" if down_or_up else "down")
                         distance = self.determineelevatordistance()  # Determine the distance
                         print("Distance: ", distance)
-
-
 
                 if self._currentFloor == self._pathFloors[0]:
                     # Elevator has stopped at the destination
@@ -180,4 +176,5 @@ class Elevator:
 
     def determineelevatordistance(self):
         """Returns the distance from current floor to objective floor"""
-        return abs(self._currentFloor - self._pathFloors[0])
+        if abs(self._currentFloor - self._pathFloors[0]) is not 0:
+            return abs(self._currentFloor - self._pathFloors[0])
