@@ -84,7 +84,7 @@ class Elevator:
     def arrival(self):
         if len(self._pathFloors) > 0:
             if self._currentFloor == self._pathFloors[0]:
-                self._pathFloors.pop(0)
+                self._pathFloors.remove(self._pathFloors[0])
 
     def setOffset(self, time):
         """An added time in the timer object when it reaches an asked floor, simulating the time it takes for
@@ -96,9 +96,9 @@ class Elevator:
         print("self.askedFloors " + str(self._askedFloors))
         # print("path before reorganize " + str(self._pathFloors))
         self.reorganizePath()
-        # print("path after reorganize " + str(self._pathFloors))
+        print("path after reorganize " + str(self._pathFloors))
 
-        self.start_trip()
+        #self.start_trip()
 
     def reorganizePath(self):
         i = 0
@@ -109,23 +109,25 @@ class Elevator:
             self._askedFloors.remove(self._askedFloors[len(self._askedFloors) - 1])  # remove the last element
 
         else:
-            # is the elevator going down?
-            if self._currentFloor > self._pathFloors[0]:
-                # is the new floor on the way?
-                if self._currentFloor > self._askedFloors[len(self._askedFloors) - 1]:
-                    self._pathFloors.append(self._askedFloors[len(self._askedFloors) - 1])
-                    self._askedFloors.remove(self._askedFloors[len(self._askedFloors) - 1])  # remove the last element
-                    # top down
-                    self._pathFloors.sort(reverse=True)
+            if self._askedFloors[len(self._askedFloors) - 1] in self._pathFloors:
+                i=0
+            else:
+                # is the elevator going down?
+                if self._currentFloor > self._pathFloors[0]:
+                    # is the new floor on the way?
+                    if self._currentFloor > self._askedFloors[len(self._askedFloors) - 1]:
+                        self._pathFloors.append(self._askedFloors[len(self._askedFloors) - 1])
+                        self._askedFloors.remove(self._askedFloors[len(self._askedFloors) - 1])  # remove the last element
+                        # top down
+                        self._pathFloors.sort(reverse=True)
 
-            # is the elevator going up?
-            elif self._currentFloor < self._pathFloors[0]:
-                # is the new floor on the way?
-                if self._currentFloor < self._askedFloors[i]:
-                    print("is it?")
-                    self._pathFloors.append(self._askedFloors[len(self._askedFloors) - 1])
-                    self._askedFloors.remove(self._askedFloors[len(self._askedFloors) - 1])  # remove the last element
-                    self._pathFloors.sort(reverse=False)
+                # is the elevator going up?
+                elif self._currentFloor < self._pathFloors[0]:
+                    # is the new floor on the way?
+                    if self._currentFloor < self._askedFloors[len(self._askedFloors) - 1]:
+                        self._pathFloors.append(self._askedFloors[len(self._askedFloors) - 1])
+                        self._askedFloors.remove(self._askedFloors[len(self._askedFloors) - 1])  # remove the last element
+                        self._pathFloors.sort(reverse=False)
         list(self._pathFloors)
 
     def start_trip(self):
@@ -167,8 +169,8 @@ class Elevator:
                     print("Elevator's final floor: ", self._currentFloor)
                     print("Total time elapsed:", trip_time)
                     self.arrival()
-            else:
-                print("The elevator is already in the requested floor!")
+            #else:
+            #   print("The elevator is already in the requested floor!")
 
     def determine_elevator_direction(self):
         """False for going down and True for going Up"""
