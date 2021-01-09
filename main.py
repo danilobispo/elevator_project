@@ -50,7 +50,9 @@ if __name__ == '__main__':
     t=threading.Thread(target=testRequest, args=(e,))
     t.start()
 
-    while True:
+    i=10000000
+    while i>0:
+        i=i-1
         e.start_trip()
 
 
